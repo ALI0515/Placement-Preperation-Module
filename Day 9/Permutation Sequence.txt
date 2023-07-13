@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int fact(int n)
+    {
+        if (n == 0 || n == 1)
+            return 1;
+        return n * fact(n - 1);
+    }
+
+    string getPermutation(int n, int k) {
+        vector <int> arr(n+1);
+        int i=1,dig=1;
+        string ans;
+        for(int i=1;i<n+1;i++)
+            arr[i]=i;
+
+        while(k>=0 && i<=n)
+        {
+            if(k - fact(n-i)>0)
+            {
+                k-=fact(n-i);
+                dig++;
+            }
+            else
+            {
+                string t = to_string(arr[dig]);
+                ans+=t;
+                auto it=arr.begin()+dig;
+                arr.erase(it);
+                dig=1;
+                i++;
+            }
+        }
+        return ans;
+    }
+};

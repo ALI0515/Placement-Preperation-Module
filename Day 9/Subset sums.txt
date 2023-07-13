@@ -1,0 +1,22 @@
+class Solution
+{
+public:
+    void solve(int i,int N,vector<int>&v,vector<int>&arr,vector<int>&ans,int sum)
+    {
+        if(i==N)
+        {
+            ans.push_back(sum);
+            return;
+        }
+        sum+=arr[i];
+        solve(i+1,N,v,arr,ans,sum);
+        sum-=arr[i];
+        solve(i+1,N,v,arr,ans,sum);
+    }
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        vector<int>ans,v;
+        solve(0,N,v,arr,ans,0);
+        return ans;
+    }
+};

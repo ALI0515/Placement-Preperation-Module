@@ -1,0 +1,36 @@
+class Solution {
+private:
+    void solve(vector<int> nums,int index,set<vector<int>>& s,vector<vector<int>>& ans, vector<int> output)
+        {
+            if(index>=nums.size())
+            {
+                s.insert(output);
+                return;
+            }
+            solve(nums,index+1,s,ans,output); 
+            int element=nums[index]; 
+            output.push_back(element); 
+
+            solve(nums,index+1,s,ans,output); 
+        }
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        vector<int> output;
+        set<vector<int>> s; 
+
+        int index=0;
+        solve(nums,index,s,ans,output); 
+
+        
+        for(auto i:s)
+        {
+            ans.push_back(i);  
+        }
+
+        return ans;
+
+    }
+};

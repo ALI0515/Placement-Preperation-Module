@@ -1,0 +1,26 @@
+class Solution {
+public:
+void solve(int i,int n,vector<vector<int>>&ans,vector<int>&v,vector<int>& candidates,int k)
+{
+    if(i==n)
+    {
+        if(k==0)
+        ans.push_back(v);
+        return;
+    }
+    if(candidates[i]<=k)
+    {
+        v.push_back(candidates[i]);
+        solve(i,n,ans,v,candidates,k-candidates[i]);
+        v.pop_back();
+    }
+    solve(i+1,n,ans,v,candidates,k);
+}
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        int n=candidates.size();
+        vector<vector<int>>ans;
+        vector<int>v;
+        solve(0,n,ans,v,candidates,target);
+        return ans;
+    }
+};
