@@ -1,0 +1,78 @@
+class Solution {
+public:
+      vector<int> NSR(vector<int> &arr,int n)
+      {
+          vector<int>ans;
+        stack<int> s;
+        for(int i=n-1;i>=0;i--)
+        {
+            if(s.size()==0)
+            ans.push_back(n);
+            else if(s.size()>0 && arr[s.top()]<arr[i])
+            ans.push_back(s.top());
+            else if(s.size()>0 && arr[s.top()]>=arr[i])
+            {
+                while(s.size()>0 && arr[s.top()]>=arr[i])
+                {
+                    s.pop();
+                }
+                if(s.size()==0)
+                ans.push_back(n);
+                else
+                ans.push_back(s.top());
+            }
+            s.push(i);
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+      }
+    vector<int> NSL(vector<int> &arr,int n)
+    {
+        vector<int> ans;
+        stack<int> s;
+        for(int i=0;i<n;i++)
+        {
+            if(s.size()==0)
+            ans.push_back(-1);
+            else if(s.size()>0 && arr[s.top()]<arr[i])
+            ans.push_back(s.top());
+            else if(s.size()>0 && arr[s.top()]>=arr[i])
+            {
+                while(s.size()>0 && arr[s.top()]>=arr[i])
+                {
+                    s.pop();
+                }
+                if(s.size()==0)
+                ans.push_back(-1);
+                else
+                ans.push_back(s.top());
+            }
+            s.push(i);
+        }
+        
+        return ans;
+    }
+    int largestRectangleArea(vector<int>& heights) {
+        int n=heights.size();
+        int ans=INT_MIN;
+        vector<int>r(n);
+        r=NSR(heights,n);
+
+           
+        vector<int>l(n);
+        l=NSL(heights,n);
+        
+           
+        vector<int> w(n);
+        for(int i=0;i<n;i++)
+        {
+            w[i]=(r[i]-l[i]-1);
+            
+        }
+        for(int i=0;i<n;i++)
+        {
+            ans=max(ans,(heights[i]*w[i]));
+        }
+        return ans;
+    }
+};
