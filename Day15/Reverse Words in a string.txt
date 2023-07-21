@@ -1,0 +1,29 @@
+string reverseWords(string s) {
+        int n=s.size();
+        string ans="",str="";
+        for(int i=n-1;i>=0;i--)
+        {
+          if(s[i]==32)
+          {
+              if(str.size()>0)
+              {
+              reverse(str.begin(),str.end());
+              ans+=str+" ";
+              str="";
+              }
+              continue;
+          }
+          str+=s[i];
+        }
+        
+        reverse(str.begin(),str.end());
+        ans+=str;
+        for(int i=ans.size()-1;i>=0;i--)
+        {
+            if(ans[i]==32)
+            ans.erase(ans.begin()+i);
+            else
+            break;
+        }
+        return ans;
+    }
