@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        vector<int>fre(26,0);vector<int>fre1(26,0);
+        if(s.size()!=t.size())
+        return false;
+        for(int i=0;i<s.size();i++)
+        {
+            fre[s[i]-97]++;
+        }
+         for(int i=0;i<t.size();i++)
+        {
+            fre1[t[i]-97]++;
+        }
+    
+        if(fre==fre1)
+        return true;
+        else
+        return false;
+    }
+};
