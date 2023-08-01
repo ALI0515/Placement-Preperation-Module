@@ -1,0 +1,33 @@
+lass Solution {
+public:
+
+    Node* connect(Node* root) {
+        
+        if(root==NULL)
+         return root;
+         
+         queue<Node*>q;
+         q.push(root);
+        
+         while(!q.empty())
+         {
+             int n=q.size();
+             for(int i=0;i<n;i++)
+             {
+               Node* newnode=q.front();
+               q.pop();
+               if(i==n-1)
+               newnode->next=NULL;
+               else
+               newnode->next=q.front();
+               if(newnode->left)
+               q.push(newnode->left);
+               if(newnode->right)
+               q.push(newnode->right);
+             }
+            
+         } 
+         return root;
+       
+    }
+};
