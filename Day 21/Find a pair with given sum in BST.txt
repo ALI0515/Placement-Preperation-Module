@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void solve(TreeNode* root,unordered_set<int>&uns,int &flag,int k)
+    {
+        if(root==NULL)
+        return;
+        if(uns.find(k-root->val)!=uns.end())
+        {
+            flag=1;
+            return;
+        }
+        uns.insert(root->val);
+        solve(root->left,uns,flag,k);
+        solve(root->right,uns,flag,k);
+
+        return;
+    }
+    bool findTarget(TreeNode* root, int k) {
+        int flag=0;
+        unordered_set<int>uns;
+        solve(root,uns,flag,k);
+        if(flag==1)
+        return true;
+        else 
+        return false;
+    }
+};

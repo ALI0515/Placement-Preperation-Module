@@ -1,0 +1,26 @@
+class BSTIterator {
+public:
+    int i = 0;
+    vector <int> nodes;
+
+    BSTIterator(TreeNode* root) {
+        traversal(root, nodes);
+    }
+    
+    int next() {
+        return nodes[i++];
+    }
+    
+    bool hasNext() {
+        return (i != nodes.size());
+    }
+    
+private:
+    void traversal(TreeNode* root, vector <int>& nodes) {
+        if (root == NULL)
+            return;
+        traversal(root->left, nodes);
+        nodes.push_back(root->val);
+        traversal(root->right, nodes);    
+    }    
+};
